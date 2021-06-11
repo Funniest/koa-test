@@ -17,6 +17,9 @@ const Koa = require("koa");
 const app = new Koa();
 
 createConnection().then(connection => {
+    // body parser
+    app.use(bodyParser());
+
     // Route define
     app.use(KoaStatic(Path.join(__dirname, "./views")));
 
@@ -28,9 +31,6 @@ createConnection().then(connection => {
             }
         })
     });
-
-    // body parser
-    app.use(bodyParser());
 
     // Allowed methods
     app.use(routes.routes()).use(routes.allowedMethods());
